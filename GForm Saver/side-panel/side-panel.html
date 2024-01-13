@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GForm Saver</title>
+    <script src="side-panel.js"></script>
+    <link rel="stylesheet" href="side-panel.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div id="head-cont">
+      <div id="acc-cont">
+        <div>
+          <div class="onyx">Google Drive account :</div>
+          <!-- todo: darkmode -->
+          <button id="sign-out" class="btn">signout</button>
+        </div>
+        <p id="email">durgavinay_balla@srmap.edu.in</p>
+      </div>
+      <div id="tab-box">
+        <button class="tab-btn active-tab">Defaults</button>
+        <button class="tab-btn">Saved Files</button>
+        <button class="tab-btn">Filled Forms</button>
+        <button class="tab-btn">More</button>
+      </div>
+    </div>
+    <div id="content-box">
+      <div id="default-tab" class="content active-tab">
+        <div>
+          <div class="options-cont">
+            <fieldset>
+              <legend>Where to save?</legend>
+              <div class="options">
+                <div>
+                  <input type="radio" name="LOCATION" id="GDRIVE"
+                    value="GDRIVE" />
+                  <label for="GDRIVE">Google Drive</label>
+                </div>
+                <div>
+                  <input type="radio" name="LOCATION" id="DEVICESTORAGE" value="DEVICESTORAGE" />
+                  <label for="DEVICESTORAGE">Device Storage</label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>File format?</legend>
+              <div class="options">
+                <div>
+                  <input type="radio" name="FILEFORMAT" id="HTML" value="HTML" />
+                  <label for="HTML">HTML</label>
+                </div>
+                <div>
+                  <input type="radio" name="FILEFORMAT" id="PDF" value="PDF" />
+                  <label for="PDF">PDF</label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>What to save?</legend>
+              <div class="options">
+                <div>
+                  <input type="radio" name="CONTENT" id="QUESONLY" value="QUESONLY" />
+                  <label for="QUESONLY">Questions Only</label>
+                </div>
+                <div>
+                  <input type="radio" name="CONTENT" id="QUESANDANS" value="QUESANDANS" />
+                  <label for="QUESANDANS">Questions & Answers</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <button id="save-defaults" class="btn">Save</button>
+        </div>
+      </div>
+      <div id="savedfiles-tab" class="content"></div>
+      <div id="filledforms-tab" class="content"></div>
+      <div id="more-tab" class="content"></div>
+    </div>
+  </body>
+</html>
