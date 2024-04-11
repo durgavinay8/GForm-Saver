@@ -1,0 +1,75 @@
+:root {
+  --gFormColor: #673ab7;
+}
+@media print {
+  #GFormSaver-custom-card {
+    visibility: hidden;
+  }
+}
+#GFormSaver-custom-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#GFormSaver-custom-card label {
+  cursor: pointer;
+}
+#GFormSaver-custom-card input {
+  cursor: pointer;
+  accent-color: var(--gFormColor);
+}
+#form-url-cont {
+  padding-top: 20px;
+}
+#form-url-cont span:last-child {
+  font-size: small;
+  overflow-wrap: anywhere;
+}
+#form-comment-cont,
+#form-heading-cont,
+#form-url-cont {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#FORMCOMMENT,
+#FORMHEADING {
+  cursor: pointer;
+  border: none;
+  flex-grow: 1;
+  border-bottom: 2px solid rgba(211, 211, 211, 0.664);
+  font-family: "docs-Roboto", Helvetica, Arial, sans-serif;
+}
+#FORMCOMMENT:active,
+#FORMCOMMENT:focus,
+#FORMHEADING:active,
+#FORMHEADING:focus {
+  outline: none;
+  border-bottom: 2px solid var(--gFormColor);
+}
+#GFormSaverBtn-cont {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 10px;
+}
+.GFormSaverBtn {
+  padding: 5px 8px;
+  color: #fff;
+  border: none;
+  background-color: var(--gFormColor);
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.GFormSaverBtn:hover,
+.GFormSaverBtn:focus {
+  background-color: var(--gFormColor);
+  box-shadow: 1px 1px 5px rgb(128, 128, 128);
+}
+.GFormSaverBtn:active {
+  background-color: var(--gFormColor);
+}

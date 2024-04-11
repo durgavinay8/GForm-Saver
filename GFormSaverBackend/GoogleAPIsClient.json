@@ -1,0 +1,12 @@
+{
+  "web": {
+    "client_id": "1070878439165-phcdlf841hkkvls0k4lh0o28hf7nvs0e.apps.googleusercontent.com",
+    "project_id": "gform-saver",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": ["http://localhost:6900/api/oauth/callback"],
+    "javascript_origins": ["http://localhost"]
+  }
+}
