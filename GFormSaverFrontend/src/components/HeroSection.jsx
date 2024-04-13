@@ -22,9 +22,9 @@ const HeroSection = () => {
             organised!
           </h1>
           <p className="text-textcolor text-center md:text-start">
-            Effortlessly manage your Google Forms and responses with our
-            intuitive Chrome extension. Say goodbye to chaos and hello to
-            streamlined form management!
+            Effortlessly manage your <strong>Google Form Submissions</strong>{" "}
+            with our intuitive Chrome extension. Say goodbye to chaos and hello
+            to streamlined form management!
           </p>
           <a
             href="https://drive.google.com/drive/folders/1OcZWtve42-W3c9Qc8X0OHsFMpNZVxxRl?usp=sharing"

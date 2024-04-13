@@ -35,22 +35,23 @@ async function insertCustomCard() {
     .getElementById("form-url-cont")
     .getElementsByTagName("span")[1].innerText = document.location.href;
 
-  let GFormSaverBtn1 = document.getElementById("GFormSaverBtn1");
+  const GFormSaverBtn1 = document.getElementById("GFormSaverBtn1");
   GFormSaverBtn1.addEventListener("click", async function () {
     this.blur();
-    if (!accessToken) alert("GFormSaver : Login to the webpage to save!");
-    else handleSaveUrlComments();
+    // if (!accessToken) alert("GFormSaver : Login to the webpage to save!");
+    // else
+    handleSaveUrlComments();
   });
 
-  let GFormSaverBtn2 = document.getElementById("GFormSaverBtn2");
+  const GFormSaverBtn2 = document.getElementById("GFormSaverBtn2");
   GFormSaverBtn2.addEventListener("click", async function () {
     this.blur();
-    if (!accessToken) {
-      alert("GFormSaver : Login to the webpage to save!");
-    } else {
-      handleSaveUrlComments();
-      handleSaveAsPdf();
-    }
+    // if (!accessToken) {
+    //   alert("GFormSaver : Login to the webpage to save!");
+    // } else {
+    handleSaveUrlComments();
+    handleSaveAsPdf();
+    // }
   });
 
   //Fetching access token
@@ -66,72 +67,85 @@ async function insertCustomCard() {
 }
 
 async function handleSaveAsPdf() {
-  const formHtml = document.getElementsByClassName("Uc2NEf")[0];
-  const toRemove = formHtml.querySelector("#GFormSaver-custom-card");
-  toRemove.style.display = "none";
-  const options = {
-    margin: 10,
-    image: { type: "jpeg", quality: 1 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: "mm", format: "a4", orientation: "p" },
-  };
-  const fileName = getFormHeading();
-  let blob = null;
-  try {
-    blob = await html2pdf()
-      .set(options)
-      .from(formHtml)
-      .outputPdf("blob", fileName);
-  } catch (error) {
-    alert("GFormSaver : Error generating PDF");
-    console.error("Error generating PDF:", error);
-    return;
-  }
-  serialize(blob).then(([base64Data, fileType]) => {
-    const formData = {
-      fileName: fileName,
-      fileData: base64Data,
+  const btn = document.getElementById("GFormSaverBtn2");
+  btn.innerHTML = `<div class="dot-flashing"></div>`;
+  btn.disabled = true;
+  setTimeout(async () => {
+    const formHtml = document.getElementsByClassName("Uc2NEf")[0];
+    const toRemove = formHtml.querySelector("#GFormSaver-custom-card");
+    toRemove.style.display = "none";
+    const options = {
+      margin: 10,
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "mm", format: "a4", orientation: "p" },
     };
+    const fileName = getFormHeading();
+    let blob = null;
+    try {
+      blob = await html2pdf()
+        .set(options)
+        .from(formHtml)
+        .outputPdf("blob", fileName);
+    } catch (error) {
+      alert("GFormSaver : Error generating PDF");
+      console.error("Error generating PDF:", error);
+      return;
+    }
+    serialize(blob).then(([base64Data, fileType]) => {
+      const formData = {
+        fileName: fileName,
+        fileData: base64Data,
+      };
+      chrome.runtime.sendMessage(
+        {
+          action: "savePdf",
+          formData: formData,
+          headers: getHeaders(),
+        },
+        (response) => {
+          alert(
+            response?.isSucces
+              ? "Successfully uploaded the form as pdf"
+              : `Failed to upload the form as pdf : ${response.error}`
+          );
+          btn.innerHTML = "Save Form PDF & Info";
+          btn.disabled = false;
+        }
+      );
+    });
+    toRemove.style.display = "";
+  }, "10000");
+}
+
+async function handleSaveUrlComments() {
+  const btn = document.getElementById("GFormSaverBtn1");
+  btn.innerHTML = `<div class="dot-flashing"></div>`;
+  btn.disabled = true;
+  setTimeout(() => {
+    const formMetadata = {
+      url: document.location.href,
+      heading: document.getElementById("FORMHEADING")?.value.trim() || "",
+      comment: document.getElementById("FORMCOMMENT")?.value.trim() || "",
+    };
+    //Saving URL & Comments
     chrome.runtime.sendMessage(
       {
-        action: "savePdf",
-        formData: formData,
+        action: "saveUrlComments",
+        formMetadata,
         headers: getHeaders(),
       },
       (response) => {
         alert(
           response?.isSucces
-            ? "Successfully uploaded the form as pdf"
+            ? "Successfully uploaded the form metadata"
             : `Failed to upload the form as pdf : ${response.error}`
         );
+        btn.innerHTML = "Save Form Info";
+        btn.disabled = false;
       }
     );
-  });
-
-  toRemove.style.display = "";
-}
-
-async function handleSaveUrlComments() {
-  const formMetadata = {
-    url: document.location.href,
-    heading: document.getElementById("FORMHEADING")?.value.trim() || "",
-    comment: document.getElementById("FORMCOMMENT")?.value.trim() || "",
-  };
-  //Saving URL & Comments
-  chrome.runtime.sendMessage(
-    {
-      action: "saveUrlComments",
-      formMetadata,
-      headers: getHeaders(),
-    },
-    (response) => {
-      alert(
-        response?.isSucces
-          ? "Successfully uploaded the form metadata"
-          : `Failed to upload the form as pdf : ${response.error}`
-      );
-    }
-  );
+  }, "10000");
 }
 
 function getBackgroundColor() {
