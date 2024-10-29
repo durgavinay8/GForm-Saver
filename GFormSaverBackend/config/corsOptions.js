@@ -1,7 +1,7 @@
 const allowedOrigins = [
   "http://localhost:5173",
-  "chrome-extension://capepfaglbegkflahfgicnencebdeaem",
-  "http://cr-awsbucket.s3-website-us-east-1.amazonaws.com",
+  "chrome-extension://*",
+  "https://google-form-saver.vercel.app",
 ];
 
 export const corsOptions = {
