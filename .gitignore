@@ -2,3 +2,4 @@ GFormSaverBackend/node_modules/
 GFormSaverBackend/.env
 GFormSaverFrontend/node_modules/
 GFormSaverExtension/node_modules/
+GFormSaverBackend/GoogleAPIsClient.json

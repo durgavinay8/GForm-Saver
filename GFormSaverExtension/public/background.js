@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 /*
 chrome.browserAction.onClicked.addListener(function () {
   chrome.tabs.create({
-    url: "http://cr-awsbucket.s3-website-us-east-1.amazonaws.com",
+    url: "https://google-form-saver.vercel.app/",
   });
 });
 */

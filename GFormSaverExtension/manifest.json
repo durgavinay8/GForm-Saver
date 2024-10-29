@@ -22,7 +22,7 @@
     }
   ],
   "permissions": ["storage", "sidePanel", "scripting", "activeTab", "tabs"],
-  "host_permissions": ["http://localhost:5173/*"],
+  "host_permissions": ["http://localhost:5173/*", "https://google-form-saver.vercel.app/*"],
   "background": {
     "service_worker": "public/background.js"
   }
