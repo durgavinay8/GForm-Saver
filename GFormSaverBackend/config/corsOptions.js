@@ -1,6 +1,6 @@
 const allowedOrigins = [
   "http://localhost:5173",
-  "chrome-extension://dpcabdkgeemnicjpebpblniplknhmdgn",
+  "chrome-extension://capepfaglbegkflahfgicnencebdeaem",
   "http://cr-awsbucket.s3-website-us-east-1.amazonaws.com",
 ];
 

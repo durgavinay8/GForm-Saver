@@ -16,12 +16,13 @@ export const handleLogin = asyncHandler(async (req, res, next) => {
   const cookies = req.cookies;
   if (!req.body.code)
     return next(new CustomError("Missing Authentication code!", 400));
+  let tokens = null;
   try {
-    const { tokens } = await oAuth2Client.getToken(req.body.code);
+    tokens = await oAuth2Client.getToken(req.body.code);
   } catch (error) {
     return next(new CustomError("Invalid Authentication code", 400));
   }
-  const decodedToken = jwt.decode(tokens.id_token);
+  const decodedToken = jwt.decode(tokens.tokens.id_token);
   if (!decodedToken.email_verified)
     return next(new CustomError("Email not verified", 403));
 
@@ -33,7 +34,7 @@ export const handleLogin = asyncHandler(async (req, res, next) => {
         email: decodedToken.email,
         googleUserId: decodedToken.sub,
         profileUrl: decodedToken.picture,
-        googleRefreshToken: tokens.refresh_token,
+        googleRefreshToken: tokens.tokens.refresh_token,
       },
     },
     { upsert: true, new: true, select: "-filledForms" }
@@ -61,7 +62,6 @@ export const handleLogin = asyncHandler(async (req, res, next) => {
   }
   updatedUser.myRefreshTokens = [...myNewRefreshTokenArray, myNewRefreshToken];
   await updatedUser.save();
-
   res.cookie("refreshToken", myNewRefreshToken, {
     httpOnly: true,
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -70,7 +70,7 @@ export const handleLogin = asyncHandler(async (req, res, next) => {
   });
   res.cookie(
     "googleAccessToken",
-    getModifiedGoogleToken(tokens.access_token, updatedUser._id),
+    getModifiedGoogleToken(tokens.tokens.access_token, updatedUser._id),
     {
       httpOnly: true,
       maxAge: 60 * 60 * 1000,
@@ -84,7 +84,7 @@ export const handleLogin = asyncHandler(async (req, res, next) => {
       name: decodedToken.name,
       email: decodedToken.email,
       profileUrl: decodedToken.picture,
-      googleAccessToken: tokens.access_token,
+      googleAccessToken: tokens.tokens.access_token,
     })
   );
 });

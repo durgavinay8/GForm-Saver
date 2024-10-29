@@ -23,9 +23,9 @@ export const checkGoogleAccessToken = asyncHandler(async (req, res, next) => {
     req.cookies?.googleAccessToken || req.headers.googleaccesstoken;
   if (typeof googleAccessToken === "undefined" || !googleAccessToken)
     return next(new CustomError("Missing Google's Access Token!", 400));
-  googleAccessToken = deModifyGoogleToken(googleAccessToken, req.userId);
-  if (googleAccessToken === "error")
-    return next(new CustomError("Forbidden!", 401));
+  // googleAccessToken = deModifyGoogleToken(googleAccessToken, req.userId);
+  // if (googleAccessToken === "error")
+  //   return next(new CustomError("Forbidden!", 401));
   oAuth2Client.setCredentials({
     refresh_token: await getGoogleRefreshTokenById(req.userId),
     access_token: googleAccessToken || "",
@@ -37,6 +37,6 @@ export const checkGoogleAccessToken = asyncHandler(async (req, res, next) => {
     return next(new CustomError("Expired Google's Access Token!", 400));
   */
   const { token } = await oAuth2Client.getAccessToken();
-  req.googleAccessToken = token;
+  req.googleAccessToken = token.split(" ")[1];
   next();
 });
