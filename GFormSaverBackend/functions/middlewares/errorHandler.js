@@ -1,5 +1,4 @@
-import multer from "multer";
-import { constants } from "../constants.js";
+import { constants } from "../utils/constants.js";
 
 export default function errorHandler(err, req, res, next) {
   err.statusCode = err.statusCode || 500;

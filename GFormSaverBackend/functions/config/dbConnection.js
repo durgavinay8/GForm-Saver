@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import CustomError from "../utils/CustomError.js";
 
-const connectDb = async () => {
+const connectDb = async (req, res, next) => {
   try {
     const connect = await mongoose.connect(
       process.env.MONGODB_CONNECTION_STRING
@@ -8,9 +9,9 @@ const connectDb = async () => {
     console.log(
       `Database Connected : ${connect.connection.host} and ${connect.connection.name}`
     );
+    next();
   } catch (error) {
-    console.error("Error connecting to mongodb: ", error);
-    process.exit(1);
+    next(new CustomError("Internal Server Error!", 500));
   }
 };
 

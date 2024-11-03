@@ -1,4 +1,5 @@
 import express from "express";
+import ServerlessHttp from "serverless-http";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.js";
 import connectDb from "./config/dbConnection.js";
@@ -12,23 +13,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
-await connectDb();
-
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(cors(corsOptions));
-
+app.use(connectDb);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", (req, res) => {
-  res.send("It's working! Thank you Vercel <3");
-});
-
 app.use("/api/oauth", authRoutes);
-
 app.use(validateAccessToken);
 app.use("/api/form-metadata", formMetadataRoutes);
 app.use("/api/form-pdf", formPdfRoutes);
@@ -36,8 +29,7 @@ app.use("/api/form-pdf", formPdfRoutes);
 app.all("*", (req, res, next) => {
   return next(new CustomError("Can't find the URL on the server!", 500));
 });
+
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server is listening at PORT: ${PORT}...`);
-});
+export const handler = ServerlessHttp(app);

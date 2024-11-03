@@ -3,3 +3,5 @@ GFormSaverBackend/.env
 GFormSaverFrontend/node_modules/
 GFormSaverExtension/node_modules/
 GFormSaverBackend/GoogleAPIsClient.json
+# Local Netlify folder
+.netlify
