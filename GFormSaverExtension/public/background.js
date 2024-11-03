@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (action) {
     case "getAccessToken": {
       try {
-        fetch("http://localhost:6900/api/oauth/refresh", {
+        fetch("https://gformsaver-api.netlify.app/api/oauth/refresh", {
           method: "GET",
           credentials: "include",
         }).then((response) => {
@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
     case "saveUrlComments": {
       try {
-        fetch("http://localhost:6900/api/form-metadata", {
+        fetch("https://gformsaver-api.netlify.app/api/form-metadata", {
           method: "POST",
           headers: {
             ...headers,
@@ -83,7 +83,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       newFormData.append("fileData", fileData, formData.fileName);
       newFormData.append("fileName", formData.fileName);
       try {
-        fetch("http://localhost:6900/api/form-pdf", {
+        fetch("https://gformsaver-api.netlify.app/api/form-pdf", {
           method: "POST",
           headers,
           body: newFormData,

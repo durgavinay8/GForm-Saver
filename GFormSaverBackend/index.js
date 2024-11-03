@@ -23,10 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", (req, res) => {
-  res.send("It's working! Thank you Vercel <3");
-});
-
 app.use("/api/oauth", authRoutes);
 
 app.use(validateAccessToken);
