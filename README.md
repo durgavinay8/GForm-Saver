@@ -1,6 +1,6 @@
 # GFormSaver | Google forms managment tool for respondants
 
-[Extension's Link](https://drive.google.com/drive/folders/1OcZWtve42-W3c9Qc8X0OHsFMpNZVxxRl?usp=sharing) | [Webapp link](https://google-form-saver.vercel.app)
+[Website link](https://google-form-saver.vercel.app) | [Project Demo](https://drive.google.com/file/d/1CsOVlJaSimbmPTk25jOek9TZBeElVb8Q/view) | [Extension's Link](https://drive.google.com/drive/folders/1OcZWtve42-W3c9Qc8X0OHsFMpNZVxxRl?usp=sharing)
 
 Google Forms creators have a sleek dashboard from Google. But what about the users who fill out those forms?
 
@@ -27,10 +27,6 @@ This very question inspired me to create GFormSaver, a tailored management tool 
 - File storage—
 
   Effortlessly syncs with your Google Drive , providing seamless file storage and selection capabilities.
-
-## How this tool works [visual]
-
-[Google Drive Link]()
 
 ## Tech stack I used
 
