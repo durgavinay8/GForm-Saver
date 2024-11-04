@@ -23,7 +23,9 @@ const Navbar = ({ isHomePage = false }) => {
   return (
     <nav className="w-full flex py-3 justify-between items-center font-poppins font-normal text-[1.1rem] text-textcolor realtive top-0 bg-background">
       <div className="flex gap-7 justify-between w-full lg:w-fit">
-        <img src={logoAndText} alt="GFormSaver" className="h-11" />
+        <a href="https://google-form-saver.vercel.app/home">
+          <img src={logoAndText} alt="GFormSaver" className="h-11" />
+        </a>
         {isHomePage && (
           <ul className="list-none hidden lg:flex justify-end items-center gap-7 flex-1">
             {navLinksLeft.map(([title, url], index) => (
