@@ -5,7 +5,7 @@ import heroImg from "../assets/hero-sec-img.svg";
 function GetStartedPage() {
   const handleGetstarted = () => {
     chrome.tabs.create({
-      url: "https://google-form-saver.vercel.app/",
+      url: "https://google-form-saver.vercel.app",
     });
   };
   return (

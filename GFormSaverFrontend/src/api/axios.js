@@ -1,11 +1,11 @@
 import axios from "axios";
 export default axios.create({
-  baseURL: "http://localhost:6900",
+  baseURL: "https://gformsaver-api.netlify.app",
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: "http://localhost:6900",
+  baseURL: "https://gformsaver-api.netlify.app",
   withCredentials: true,
 });
